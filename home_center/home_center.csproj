@@ -1,0 +1,586 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Xamarin.Forms.5.0.0.2012\build\Xamarin.Forms.props" Condition="Exists('..\packages\Xamarin.Forms.5.0.0.2012\build\Xamarin.Forms.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{09C31A6A-32B1-4949-9EB7-BC712FDC3680}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>home_center</RootNamespace>
+    <AssemblyName>home_center</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="HandyControl, Version=3.5.2.0, Culture=neutral, PublicKeyToken=45be8712787a1e5b, processorArchitecture=MSIL">
+      <HintPath>..\packages\HandyControls.3.5.3\lib\net472\HandyControl.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Core.XForms, Version=25.1.37.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Xamarin.Core.25.1.37\lib\netstandard2.0\Syncfusion.Core.XForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Licensing, Version=25.1.37.0, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Licensing.25.1.37\lib\net462\Syncfusion.Licensing.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SfRating.XForms, Version=25.1.37.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Xamarin.SfRating.25.1.37\lib\netstandard2.0\Syncfusion.SfRating.XForms.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Reactive, Version=6.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.6.0.1\lib\net472\System.Reactive.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Windows.Forms, Version=3.0.6000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.Windows.Forms.6.0.1\lib\net472\System.Reactive.Windows.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Forms.5.0.0.2012\lib\netstandard2.0\Xamarin.Forms.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Platform, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Forms.5.0.0.2012\lib\netstandard2.0\Xamarin.Forms.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Xaml, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Forms.5.0.0.2012\lib\netstandard2.0\Xamarin.Forms.Xaml.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="BL\CategoryService.cs" />
+    <Compile Include="BL\CityServise.cs" />
+    <Compile Include="BL\ClientService.cs" />
+    <Compile Include="BL\codedirectionService.cs" />
+    <Compile Include="BL\Globali.cs" />
+    <Compile Include="BL\ItemOrderService.cs" />
+    <Compile Include="BL\ItemService.cs" />
+    <Compile Include="BL\OrderService.cs" />
+    <Compile Include="Connected Services\ServiceReference1\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\ServiceReference2\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="model\Category.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="model\City.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="model\Client.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="model\codedirector.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="model\Item.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="model\ItemOrder.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="model\Model1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="model\Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="model\Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="model\Order.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MyPicture.cs" />
+    <Compile Include="UI\About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\AddCatgory.xaml.cs">
+      <DependentUpon>AddCatgory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\addclient.xaml.cs">
+      <DependentUpon>addclient.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\addclient2.xaml.cs">
+      <DependentUpon>addclient2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Additem.xaml.cs">
+      <DependentUpon>Additem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\AgeRangeRule.cs" />
+    <Compile Include="UI\AllStatic.cs" />
+    <Compile Include="UI\cart.xaml.cs">
+      <DependentUpon>cart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ChageCode.xaml.cs">
+      <DependentUpon>ChageCode.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ClientOfDirector.xaml.cs">
+      <DependentUpon>ClientOfDirector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Club card.xaml.cs">
+      <DependentUpon>Club card.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ConvertToSum.cs" />
+    <Compile Include="UI\CreditCardValidator.cs" />
+    <Compile Include="UI\director.xaml.cs">
+      <DependentUpon>director.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\DirectorCode.xaml.cs">
+      <DependentUpon>DirectorCode.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\IdValidation.cs" />
+    <Compile Include="UI\ItemOrder1.xaml.cs">
+      <DependentUpon>ItemOrder1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\KindofCatgory.xaml.cs">
+      <DependentUpon>KindofCatgory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Kindofitem.xaml.cs">
+      <DependentUpon>Kindofitem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Member.xaml.cs">
+      <DependentUpon>Member.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\message.xaml.cs">
+      <DependentUpon>message.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\MessageClient.xaml.cs">
+      <DependentUpon>MessageClient.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\OrderClient.xaml.cs">
+      <DependentUpon>OrderClient.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\pagebeforecast.xaml.cs">
+      <DependentUpon>pagebeforecast.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Pageofitem.xaml.cs">
+      <DependentUpon>Pageofitem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\payment.xaml.cs">
+      <DependentUpon>payment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UserControl1.xaml.cs">
+      <DependentUpon>UserControl1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UserControl2.xaml.cs">
+      <DependentUpon>UserControl2.xaml</DependentUpon>
+    </Compile>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="UI\About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\AddCatgory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\addclient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\addclient2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Additem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\cart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ChageCode.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ClientOfDirector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Club card.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Dectionary1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\director.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\DirectorCode.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ItemOrder1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\KindofCatgory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Kindofitem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Member.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\message.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\MessageClient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\OrderClient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\pagebeforecast.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Pageofitem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\payment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\UserControl1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\UserControl2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="Connected Services\ServiceReference1\home_center.ServiceReference1.CompositeType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceReference1\home_center.ServiceReference1.Messege.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceReference1\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReference1\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReference1\item2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReference1\item3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReference1\Service1.wsdl" />
+    <None Include="Connected Services\ServiceReference2\home_center.ServiceReference2.CompositeType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceReference2\home_center.ServiceReference2.Messege.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceReference2\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReference2\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReference2\item2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReference2\item3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReference2\Service1.wsdl" />
+    <None Include="DataSet1.xsc">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="DataSet1.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSet1.xss">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
+    <EntityDeploy Include="model\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="model\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="MyPicture\shopping-cart.png" />
+    <Resource Include="MyPicture\snake-cup.jpg" />
+    <Resource Include="MyPicture\snake-cup3.jpg" />
+    <Resource Include="MyPicture\tea-infuser-bottle.jpg" />
+    <Resource Include="MyPicture\tea-infusion-glass-bottle.jpg" />
+    <Resource Include="MyPicture\tee-shape-5-pack.jpg" />
+    <Resource Include="MyPicture\tee-shape-5-pack2.jpg" />
+    <Resource Include="MyPicture\thermo-cup.jpg" />
+    <Resource Include="MyPicture\thermo-cup2.jpg" />
+    <Resource Include="MyPicture\unicorn-milk-mix.jpg" />
+    <Resource Include="MyPicture\unicorn-milk-mix2.jpg" />
+    <Resource Include="MyPicture\vacuum-flask-set.jpg" />
+    <Resource Include="MyPicture\vacuum-flask-set2.jpg" />
+    <Resource Include="MyPicture\Vegetable-chopper-Multi-function.jpg" />
+    <Resource Include="MyPicture\water-melon-freeze-pops.jpg" />
+    <Resource Include="MyPicture\water-melon-freeze-pops2.jpg" />
+    <Resource Include="MyPicture\win-bar-opening-tool.jpg" />
+    <Resource Include="MyPicture\win-bar-opening-tool2.jpg" />
+    <Resource Include="MyPicture\zoku-slush-maker.jpg" />
+    <Resource Include="MyPicture\zoku-slush-maker2.jpg" />
+    <Resource Include="MyPicture\אהובי לוגו.jpeg" />
+    <Resource Include="MyPicture\‏‏folding-bottle - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏folding-bottle-blue - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏folding-cutlery - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏folding-cutlery2 - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏giant-flask2 - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏giant-wine-glass-b3 - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏giant-wine-glass-g - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏golden-service-bell - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏golden-service-bell2 - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏good-faith-stone - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏Grill-Basket-for-Barbecue - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏Grill-Daddy-Steam-Cleaning - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏Grill-Daddy-Steam-Cleaning3 - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏heat-resistant-gloves - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏heat-resistant-gloves-2 - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏hot-pot-tray - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏hot-pot-tray2 - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏hqdefault_0a051db2-c8c0-4fc6-acaf-59cac46e57aa - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏i-love-beer-ring - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏ice-cream-cup - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏ice-cream-cup2 - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏ice-stick-tray - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏ice-stick-tray2 - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏kitchen-timer-60-min-moo-joie - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏kitchen-timer-60-min-moo-joie2 - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏lemon-storage-pod - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏lemon-storage-pod2 - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏metal-straw-set - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏metal-straw-set2 - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏mini-flask-keychain - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏mini-flask-keychain2 - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏mini-ice-cube-tray-joie - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏mini-ice-cube-tray-joie6 - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏nutcracker-bottle-opener-set - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏nutcracker-bottle-opener-set2 - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏pacman-salt-and-pepper-set - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏pacman-salt-and-pepper-set2 - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏pizza-cutter-axe-design - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏pizza-cutter-axe-design2 - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏pizza-cutter-van - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏pizza-cutter-van2 - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏popcorn-bucket - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏popcorn-bucket2 - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏reusable-ice-cubes - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏self-stirring-mug - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏self-stirring-mug2 - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏tea-infuser-bottle2 - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏‏‏air-pump-wine-opener2 - עותק - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏‏‏avocado-masher - עותק - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏‏‏avocado-masher2 - עותק - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏‏‏bamboo-straws2 - עותק - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏‏‏bbq-barbecue-set-apron - עותק - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏‏‏BBQ-grill-set2 - עותק - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏‏‏cactus-capsule-holder - עותק - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏‏‏cactus-capsule-holder2 - עותק - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏‏‏cactus-juice-maker - עותק - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏‏‏cactus-juice-maker2 - עותק - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏‏‏cold-blooded-ice-tray2 - עותק - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏‏‏colored-silicon-bamboo-thermo-cup - עותק - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏‏‏colored-silicon-bamboo-thermo-cup1 - עותק - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏‏‏colored-thermo-bottle - עותק - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏‏‏colored-thermo-bottle2 - עותק - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏‏‏desk-gumball-machine - עותק - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏‏‏desk-gumball-machine2 - עותק - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏‏‏eco-friendly-bamboo-thermo-mug - עותק - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏‏‏eco-friendly-bamboo-thermo-mug2 - עותק - עותק.jpg" />
+    <Resource Include="MyPicture\‏‏‏‏folding-5-liter-bottle2 - עותק - עותק.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="MyPicture\תמונה אודותינו.png" />
+    <Resource Include="UI\צילום מסך 2024-02-21 104225.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\מצגת1.jpg" />
+    <Resource Include="UI\IMG-20240523-WA0010.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceReference1\item.disco" />
+    <None Include="Connected Services\ServiceReference1\configuration91.svcinfo" />
+    <None Include="Connected Services\ServiceReference1\configuration.svcinfo" />
+    <None Include="Connected Services\ServiceReference1\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\ServiceReference2\item.disco" />
+    <None Include="Connected Services\ServiceReference2\configuration91.svcinfo" />
+    <None Include="Connected Services\ServiceReference2\configuration.svcinfo" />
+    <None Include="Connected Services\ServiceReference2\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\ServiceReference1\" />
+    <WCFMetadataStorage Include="Connected Services\ServiceReference2\" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="model\Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="model\Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Xamarin.Forms.5.0.0.2012\build\Xamarin.Forms.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Forms.5.0.0.2012\build\Xamarin.Forms.props'))" />
+    <Error Condition="!Exists('..\packages\Xamarin.Forms.5.0.0.2012\build\Xamarin.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Forms.5.0.0.2012\build\Xamarin.Forms.targets'))" />
+  </Target>
+  <Import Project="..\packages\Xamarin.Forms.5.0.0.2012\build\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.5.0.0.2012\build\Xamarin.Forms.targets')" />
+</Project>

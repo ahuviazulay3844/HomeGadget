@@ -1,0 +1,459 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DatabaceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="int" Nullable="false" />
+          <Property Name="Dedripition" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="codeCity" />
+          </Key>
+          <Property Name="codeCity" Type="int" Nullable="false" />
+          <Property Name="NameCity" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="9" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Stree" Type="nvarchar" MaxLength="50" />
+          <Property Name="HouseNumber" Type="int" />
+          <Property Name="City" Type="int" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="Dateofbirth" Type="date" Nullable="false" />
+          <Property Name="Member" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="codedirector">
+          <Key>
+            <PropertyRef Name="code" />
+          </Key>
+          <Property Name="code" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="int" Nullable="false" />
+          <Property Name="NameItem" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price_base" Type="float" Nullable="false" />
+          <Property Name="Price_after" Type="float" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="NameImage" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="Category" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ItemOrder">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="int" Nullable="false" />
+          <Property Name="CodeOrders" Type="int" Nullable="false" />
+          <Property Name="CodeItem" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="CodeOrder" />
+          </Key>
+          <Property Name="CodeOrder" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="nvarchar" MaxLength="9" Nullable="false" />
+          <Property Name="DateOrder" Type="date" Nullable="false" />
+          <Property Name="ArriveDate" Type="date" Nullable="false" />
+          <Property Name="PriceEnd" Type="float" Nullable="false" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="Delivery" Type="bit" Nullable="false" />
+          <Property Name="Payment" Type="bit" />
+        </EntityType>
+        <Association Name="FK_Client_ToCity">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="codeCity" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="City" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_ToTable">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Item" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemInorder_ToTable">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="ItemOrder" Type="Self.ItemOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="ItemOrder">
+              <PropertyRef Name="CodeItem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemOrder_ToTable">
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="ItemOrder" Type="Self.ItemOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="CodeOrder" />
+            </Principal>
+            <Dependent Role="ItemOrder">
+              <PropertyRef Name="CodeOrders" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_ToClient">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DatabaceModelStoreContainer">
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="codedirector" EntityType="Self.codedirector" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Item" EntityType="Self.Item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemOrder" EntityType="Self.ItemOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Client_ToCity" Association="Self.FK_Client_ToCity">
+            <End Role="City" EntitySet="City" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_ToTable" Association="Self.FK_Item_ToTable">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Item" EntitySet="Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemInorder_ToTable" Association="Self.FK_ItemInorder_ToTable">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="ItemOrder" EntitySet="ItemOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemOrder_ToTable" Association="Self.FK_ItemOrder_ToTable">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="ItemOrder" EntitySet="ItemOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_ToClient" Association="Self.FK_Order_ToClient">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DatabaceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="Int32" Nullable="false" />
+          <Property Name="Dedripition" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_Item_ToTable" FromRole="Category" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="codeCity" />
+          </Key>
+          <Property Name="codeCity" Type="Int32" Nullable="false" />
+          <Property Name="NameCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Client_ToCity" FromRole="City" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Stree" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HouseNumber" Type="Int32" />
+          <Property Name="City" Type="Int32" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="Dateofbirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Member" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="City1" Relationship="Self.FK_Client_ToCity" FromRole="Client" ToRole="City" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Order_ToClient" FromRole="Client" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="codedirector">
+          <Key>
+            <PropertyRef Name="code" />
+          </Key>
+          <Property Name="code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="Int32" Nullable="false" />
+          <Property Name="NameItem" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price_base" Type="Double" Nullable="false" />
+          <Property Name="Price_after" Type="Double" Nullable="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="NameImage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="Category" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Category1" Relationship="Self.FK_Item_ToTable" FromRole="Item" ToRole="Category" />
+          <NavigationProperty Name="ItemOrder" Relationship="Self.FK_ItemInorder_ToTable" FromRole="Item" ToRole="ItemOrder" />
+        </EntityType>
+        <EntityType Name="ItemOrder">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="Int32" Nullable="false" />
+          <Property Name="CodeOrders" Type="Int32" Nullable="false" />
+          <Property Name="CodeItem" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_ItemInorder_ToTable" FromRole="ItemOrder" ToRole="Item" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_ItemOrder_ToTable" FromRole="ItemOrder" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="CodeOrder" />
+          </Key>
+          <Property Name="CodeOrder" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateOrder" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ArriveDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PriceEnd" Type="Double" Nullable="false" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="Delivery" Type="Boolean" Nullable="false" />
+          <Property Name="Payment" Type="Boolean" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Order_ToClient" FromRole="Order" ToRole="Client" />
+          <NavigationProperty Name="ItemOrder" Relationship="Self.FK_ItemOrder_ToTable" FromRole="Order" ToRole="ItemOrder" />
+        </EntityType>
+        <Association Name="FK_Item_ToTable">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Item" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_ToCity">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="codeCity" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="City" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_ToClient">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemInorder_ToTable">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="ItemOrder" Type="Self.ItemOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="ItemOrder">
+              <PropertyRef Name="CodeItem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemOrder_ToTable">
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="ItemOrder" Type="Self.ItemOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="CodeOrder" />
+            </Principal>
+            <Dependent Role="ItemOrder">
+              <PropertyRef Name="CodeOrders" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities4" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Category" EntityType="Self.Category" />
+          <EntitySet Name="City" EntityType="Self.City" />
+          <EntitySet Name="Client" EntityType="Self.Client" />
+          <EntitySet Name="codedirector" EntityType="Self.codedirector" />
+          <EntitySet Name="Item" EntityType="Self.Item" />
+          <EntitySet Name="ItemOrder" EntityType="Self.ItemOrder" />
+          <EntitySet Name="Order" EntityType="Self.Order" />
+          <AssociationSet Name="FK_Item_ToTable" Association="Self.FK_Item_ToTable">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Item" EntitySet="Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_ToCity" Association="Self.FK_Client_ToCity">
+            <End Role="City" EntitySet="City" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_ToClient" Association="Self.FK_Order_ToClient">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemInorder_ToTable" Association="Self.FK_ItemInorder_ToTable">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="ItemOrder" EntitySet="ItemOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemOrder_ToTable" Association="Self.FK_ItemOrder_ToTable">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="ItemOrder" EntitySet="ItemOrder" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DatabaceModelStoreContainer" CdmEntityContainer="Entities4">
+          <EntitySetMapping Name="Category">
+            <EntityTypeMapping TypeName="DatabaceModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Dedripition" ColumnName="Dedripition" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="City">
+            <EntityTypeMapping TypeName="DatabaceModel.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="codeCity" ColumnName="codeCity" />
+                <ScalarProperty Name="NameCity" ColumnName="NameCity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="DatabaceModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Stree" ColumnName="Stree" />
+                <ScalarProperty Name="HouseNumber" ColumnName="HouseNumber" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Dateofbirth" ColumnName="Dateofbirth" />
+                <ScalarProperty Name="Member" ColumnName="Member" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="codedirector">
+            <EntityTypeMapping TypeName="DatabaceModel.codedirector">
+              <MappingFragment StoreEntitySet="codedirector">
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Item">
+            <EntityTypeMapping TypeName="DatabaceModel.Item">
+              <MappingFragment StoreEntitySet="Item">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="NameItem" ColumnName="NameItem" />
+                <ScalarProperty Name="Price_base" ColumnName="Price_base" />
+                <ScalarProperty Name="Price_after" ColumnName="Price_after" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="NameImage" ColumnName="NameImage" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemOrder">
+            <EntityTypeMapping TypeName="DatabaceModel.ItemOrder">
+              <MappingFragment StoreEntitySet="ItemOrder">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="CodeOrders" ColumnName="CodeOrders" />
+                <ScalarProperty Name="CodeItem" ColumnName="CodeItem" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order">
+            <EntityTypeMapping TypeName="DatabaceModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="CodeOrder" ColumnName="CodeOrder" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DateOrder" ColumnName="DateOrder" />
+                <ScalarProperty Name="ArriveDate" ColumnName="ArriveDate" />
+                <ScalarProperty Name="PriceEnd" ColumnName="PriceEnd" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Delivery" ColumnName="Delivery" />
+                <ScalarProperty Name="Payment" ColumnName="Payment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

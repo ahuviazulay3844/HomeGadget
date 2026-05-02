@@ -1,0 +1,22 @@
+﻿<Page x:Class="home_center.UI.DirectorCode"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:home_center.UI"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="DirectorCode">
+    <Viewbox>
+    <Grid>
+        <Grid>
+            <StackPanel >
+                <TextBlock Text="הקש קוד מנהל" FlowDirection="RightToLeft" TextAlignment="Center" FontSize="40" HorizontalAlignment="Center" Margin="0,58,0,0" Foreground="White"/>
+                <PasswordBox x:Name="tb1" Height="20" Width="100" />
+                <Button Click="Button_Click" Background="Transparent"  Height="55" Width="100" Content="אישור" FontSize="25"  Margin="10,100,580,0" Foreground="LightSeaGreen" FontWeight="Bold" BorderBrush="Transparent"/>
+            </StackPanel>
+        </Grid>
+
+    </Grid>
+    </Viewbox>
+</Page>

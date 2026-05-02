@@ -1,0 +1,53 @@
+﻿<Page x:Class="home_center.UI.MessageClient"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:home_center.UI"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MessageClient">
+
+    <Grid>
+        <Grid Background="LightSeaGreen">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <DataGrid Background="LightSeaGreen" Name="DataGrid"/>
+            <StackPanel FlowDirection="RightToLeft" Grid.Column="1">
+                <TextBlock Text="  ....נהנת מהמוצרים שלנו? נשמח לשמוע"  Foreground="White" FontSize="25" />
+                <TextBlock Text="הקש  תעודת זהות" Foreground="White" FontSize="25" FontWeight="Bold" />
+                <TextBox Width="305" Height="23" Margin="0,0,300,0">
+                    <Binding Path="Id">
+                        <Binding.ValidationRules>
+                            <local:IsId/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
+                <TextBlock Text="הקש קוד מוצר" Foreground="White" FontSize="25" FontWeight="Bold" />
+                <TextBox x:Name="idmessage" Width="301" Height="29" Margin="0,0,300,0">
+                    <Binding Path="Code">
+                        <Binding.ValidationRules>
+                            <local:IsNumber/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
+                <TextBox x:Name="codeItemmessage" Height="179" Width="299" Margin="0,31,300,0" Foreground="LightSeaGreen" FontSize="20" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" >
+                    <TextBox.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-0.618"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TextBox.RenderTransform>
+                </TextBox>
+                <Button Content="שלח" BorderBrush="Transparent"  Margin="0,0,70,0" Foreground="White" FontWeight="Bold" Background="LightSeaGreen" HorizontalAlignment="Center" FontSize="15" Height="45" Width="130" Click="sendMessage"/>
+
+
+            </StackPanel>
+        </Grid>
+
+    </Grid>
+</Page>
