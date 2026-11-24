@@ -1,317 +1,170 @@
-# Home Center
+# 🏠 הכליק · Home Center
 
-**Home Center** היא מערכת חנות דסקטופ מבוססת **WPF** לניהול מוצרים, לקוחות, הזמנות, מועדון לקוחות ומשוב — עם ממשק נפרד ללקוח ולמנהל.
+**מערכת חנות דסקטופ לכלי בית וגאדג'טים**, כתובה ב‑**C#** וב‑**WPF**. במערכת יש ממשק ללקוח וממשק נפרד למנהל. המערכת מכסה את כל התהליך: זיהוי לקוח, קטלוג, סל, מועדון לקוחות עם הנחות, תשלום מאומת וניהול מלא של מוצרים, הזמנות ולקוחות.
 
----
-
-## דרישות מערכת
-
-| דרישה | גרסה |
-|--------|------|
-| **Visual Studio** | 2017 ומעלה (מומלץ 2022) |
-| **.NET Framework** | **4.7.2** |
-| **SQL Server LocalDB** | `(LocalDB)\MSSQLLocalDB` |
-| **Windows** | WPF — Desktop בלבד |
+![C#](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=csharp&logoColor=white)
+![.NET Framework](https://img.shields.io/badge/.NET_Framework_4.7.2-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
+![WPF](https://img.shields.io/badge/WPF_%2F_XAML-0C54C2?style=for-the-badge&logo=windows&logoColor=white)
+![Entity Framework](https://img.shields.io/badge/Entity_Framework_6-68217A?style=for-the-badge&logo=nuget&logoColor=white)
+![SQL Server](https://img.shields.io/badge/SQL_Server_LocalDB-CC2927?style=for-the-badge&logo=microsoftsqlserver&logoColor=white)
+![WCF](https://img.shields.io/badge/WCF-5C2D91?style=for-the-badge&logo=dotnet&logoColor=white)
 
 ---
 
-## מבנה הפרויקט
+## 🎬 סרטון הדגמה
 
-```
-home_center/
-├── home_center.sln          ← פתרון ראשי — אפליקציית החנות
-├── home_center/
-│   ├── App.xaml / App.xaml.cs
-│   ├── MainWindow.xaml      ← חלון ראשי עם Frame לניווט
-│   ├── MyPicture/           ← תמונות מוצרים (קבצים + העלאה)
-│   ├── MyPicture.cs         ← טעינה/העלאת תמונות
-│   ├── UI/                  ← דפי WPF (Page)
-│   ├── BL/                  ← שכבת לוגיקה עסקית
-│   ├── model/               ← Entity Framework (Database First)
-│   └── Connected Services/  ← ServiceReference1 + ServiceReference2 (WCF)
-└── Messege/                 ← מערכת הודעות — פתרון נפרד
-    ├── Messege.sln
-    ├── Messege/             ← שירות WCF + meddegedb.mdf
-    ├── HOST/                ← אירוח שירות WCF
-    └── MessageManager/      ← אפליקציית שליחת הודעות (MessageManager.sln)
-```
+https://github.com/user-attachments/assets/7a81dbd4-31b5-426a-a114-0e325d5a9f2b
 
-> **שים לב:** `Messege/` **לא** כלול ב-`home_center.sln` — יש להריץ כפתרון עצמאי.
+> בסרטון רואים קנייה מלאה מתחילתה ועד סופה. ת"ז שגויה נדחית, ניסיון לחרוג מהמלאי נחסם, הלקוחה מצטרפת למועדון ומקבלת הנחת יום הולדת, כרטיס אשראי שגוי נדחה והתשלום עובר. בסוף נכנסים לממשק המנהל ורואים את ההזמנה החדשה ואת המלאי המעודכן.
 
 ---
 
-## ארכיטקטורה
+## 📸 צילומי מסך
 
-```
-┌─────────────────────────────────────────────────┐
-│  MainWindow  →  Frame  →  Page (UI/)            │
-│       ↓              ↓                          │
-│   AllStatic     BL/*Service  →  Globali.myDb    │
-│   (מצב סשן)          ↓                          │
-│                 Entities4 (EF6)                 │
-│                      ↓                          │
-│              Databace.mdf (LocalDB)             │
-└─────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────┐
-│  message / MessageManager  →  WCF Service1      │
-│                      ↓                          │
-│              meddegedb.mdf (LocalDB נפרד)       │
-└─────────────────────────────────────────────────┘
-```
-
-- **ניווט:** דפי `Page` בתוך `Frame` (`MainWindow` → `MainPage` / `director`).
-- **גישה ל-DB:** **`Globali.myDb`** — singleton של **`Entities4`**.
-- **מצב סשן:** **`AllStatic.myClient`** (לקוח מחובר) + **`AllStatic.myOrder`** (הזמנה/סל פעיל).
+| | |
+|:---:|:---:|
+| <img src="docs/screenshots/01-about.jpg" width="420"><br>**דף הבית ואודות** | <img src="docs/screenshots/02-invalid-id.jpg" width="420"><br>**ת"ז לא תקינה נדחית** |
+| <img src="docs/screenshots/03-catalog.jpg" width="420"><br>**קטלוג מוצרים עם סינון לפי קטגוריה** | <img src="docs/screenshots/04-out-of-stock.jpg" width="420"><br>**חריגה מהמלאי נחסמת ("חסר במלאי")** |
+| <img src="docs/screenshots/05-club-offer.jpg" width="420"><br>**הסל, והצעה להצטרף למועדון** | <img src="docs/screenshots/06-birthday-discount.jpg" width="420"><br>**הנחת חודש יום הולדת (30%)** |
+| <img src="docs/screenshots/07-payment-success.jpg" width="420"><br>**תשלום מאומת שבוצע בהצלחה** | <img src="docs/screenshots/08-manager-code.jpg" width="420"><br>**כניסת מנהל: קוד שגוי נדחה** |
+| <img src="docs/screenshots/09-orders.jpg" width="420"><br>**ניהול הזמנות** | <img src="docs/screenshots/10-items-stock.jpg" width="420"><br>**ניהול מוצרים ומלאי** |
 
 ---
 
-## חשיבה מקצה לקצה
+## ✨ יכולות עיקריות
 
-### 1. קנייה מלאה — **לקוח**
+### 🛒 צד הלקוח
+- **זיהוי לפי תעודת זהות.** המערכת מאמתת את ספרת הביקורת של ת"ז ישראלית, ות"ז שגויה נדחית.
+- **קטלוג מוצרים.** המוצרים נטענים ממסד הנתונים עם תמונה, מחיר וקוד מוצר, ואפשר לסנן לפי קטגוריה.
+- **בקרת מלאי בזמן אמת.** אי אפשר להוסיף לסל יותר יחידות ממה שיש במלאי.
+- **סל קניות.** לכל פריט מוצגים הכמות, המחיר ליחידה והמחיר הכולל.
+- **מועדון לקוחות:**
+  - לקוח שאינו חבר מקבל הצעה להצטרף כשהוא עובר לתשלום.
+  - חבר מועדון מקבל **5%** הנחה.
+  - בחודש יום ההולדת המערכת מוסיפה לבד עוד **30%** הנחה.
+- **תשלום מאובטח:**
+  - המערכת מאמתת את מספר הכרטיס (קידומת 53, 16 ספרות ובדיקת Luhn).
+  - אפשר לחלק לתשלומים כשהסכום מעל 200 ₪.
+- **שמירת ההזמנה.** ההזמנה ופריטיה נשמרים במסד הנתונים, והמלאי מתעדכן אוטומטית.
+
+### 🔐 צד המנהל
+- **כניסה מוגנת בקוד מנהל.**
+- **ניהול מוצרים וקטגוריות:** הוספה, עדכון ומחיקה, כולל העלאת תמונות.
+- **צפייה בהזמנות ובפריטים של כל הזמנה.**
+- **ניהול לקוחות** עם חיפוש מהיר לפי ת"ז.
+- **צפייה בהודעות** שמגיעות משירות **WCF** נפרד.
+
+---
+
+## 🧰 טכנולוגיות וכלים
+
+| תחום | טכנולוגיה | איך היא משמשת בפרויקט |
+|------|-----------|-------------------------|
+| **שפה** | **C#** | כל הלוגיקה: שכבת UI, שכבת BL ושירות ההודעות |
+| **פלטפורמה** | **.NET Framework 4.7.2** | סביבת הריצה של כל הפתרונות |
+| **ממשק משתמש** | **WPF + XAML** | ניווט בין דפים (`Page`) בתוך `Frame`, ממשק מימין לשמאל (RTL), `UserControl` לכל כרטיס מוצר ולכל שורה בסל |
+| **אימות קלט** | **WPF `ValidationRule`** | כללי אימות מותאמים: גיל (`AgeRangeRule`), עברית בלבד, מספרים, ת"ז (`IdValidation`) |
+| **אלגוריתמים** | **Luhn / ספרת ביקורת** | אימות ת"ז ישראלית ומספר כרטיס אשראי |
+| **גישה לנתונים** | **Entity Framework 6 (Database First)** | מודל `Model1.edmx`, `DbContext` בשם `Entities4`, שאילתות **LINQ** |
+| **מסד נתונים** | **SQL Server LocalDB** | קובץ `Databace.mdf` עם הטבלאות מוצרים, קטגוריות, לקוחות, ערים, הזמנות ופריטי הזמנה |
+| **תקשורת** | **WCF** (`BasicHttpBinding`) | שירות הודעות עצמאי, מתארח ב‑`HOST` ונצרך דרך Service Reference |
+| **ספריית UI** | **HandyControl** | רכיבי ממשק ועיצוב מודרני |
+| **ספריות נוספות** | **System.Reactive** | Reactive Extensions |
+| **סביבת פיתוח** | **Visual Studio 2022** | פיתוח, דיבוג ו‑NuGet |
+
+---
+
+## 🏗️ ארכיטקטורה
+
+הפרויקט בנוי **בשכבות**: ממשק (UI), לוגיקה עסקית (BL) וגישה לנתונים (EF).
+
+```
+┌──────────────────────────────────────────────────────┐
+│  UI (WPF Pages)    MainWindow → Frame → Page          │
+│        │                                             │
+│        ▼                                             │
+│  BL (Services)     ClientService · ItemService ·      │
+│                    OrderService · CategoryService ... │
+│        │                                             │
+│        ▼                                             │
+│  DAL (EF6)         Globali.myDb  →  Entities4         │
+│        │                                             │
+│        ▼                                             │
+│  SQL Server LocalDB  ·  Databace.mdf                  │
+└──────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────┐
+│  MessageManager  →  WCF Service1 (HOST :8733)         │
+│                          │                           │
+│                          ▼                           │
+│                  meddegedb.mdf (DB נפרד)              │
+└──────────────────────────────────────────────────────┘
+```
+
+- **ניווט:** דפי `Page` בתוך `Frame`. ממשק הלקוח מתחיל ב‑`MainPage`, וממשק המנהל ב‑`director`.
+- **גישה למסד הנתונים:** דרך `Globali.myDb`, מופע יחיד (singleton) של `Entities4`.
+- **מצב הסשן:** `AllStatic.myClient` שומר את הלקוח המחובר, ו‑`AllStatic.myOrder` שומר את הסל הפעיל.
+
+---
+
+## 🔄 תהליך קנייה, מקצה לקצה
 
 | שלב | רכיב | מה קורה |
 |-----|------|---------|
-| **1** | `MainWindow` | טוען **`MainPage`** ב-Frame |
-| **2** | `MainPage` → `pagebeforecast` | לקוח מזין **ת.ז.** → **`IdValidation.ValidateId`** |
-| **3** | `ClientService.GetClient` | **קיים** → **`AllStatic.myClient`** + **`AllStatic.myOrder.ItemOrder.Clear()`** |
-| **3א** | `addclient2` | **לא קיים** → השלמת רישום מהיר |
-| **4** | `Pageofitem` | **`AllStatic.myOrder.Client = client`** → כפתורי קטגוריה → **`UserControl1`** לכל מוצר |
-| **5** | `UserControl1` | בחירת כמות → **"הוסף לסל"** → **`AllStatic.myOrder.ItemOrder.Add(...)`** |
-| **6** | `cart` | **`UserControl2`** לכל שורה → כפתור תשלום |
-| **6א** | `Club_card` | אם **לא** חבר מועדון — הצעה להצטרפות → **`Member = true`** |
-| **7** | `payment` | חישוב הנחות → אימות כרטיס → **`OrderService.AddOrder`** → **`UpdateAmount`** (מלאי) → איפוס סשן |
-
-**הנחות מועדון ב-`payment`:**
-- **`Member = true`** → **5%** הנחה
-- **חודש יום הולדת** → **30%** הנחה נוספת
-- **סכום < 200 ₪** → אין אפשרות תשלומים
+| 1 | `pagebeforecast` | הלקוח מזין ת"ז, והקוד מריץ `IdValidation.ValidateId` |
+| 2 | `ClientService.GetClient` | אם הלקוח קיים הוא נשמר ב‑`AllStatic.myClient`. אם לא, הוא עובר לרישום מהיר (`addclient2`) |
+| 3 | `Pageofitem` + `UserControl1` | הלקוח בוחר קטגוריה וכמות, ולוחץ "הוסף לסל" (עם בדיקת מלאי) |
+| 4 | `cart` | תצוגת הסל ומעבר לתשלום |
+| 5 | `Club_card` | אם הלקוח לא חבר מועדון, הוא מקבל הצעה להצטרף, ואז `Member = true` |
+| 6 | `payment` | חישוב ההנחות, אימות הכרטיס, `OrderService.AddOrder` ועדכון המלאי |
 
 ---
 
-### 2. הרשמת לקוח חדש — **מקצה לקצה**
-
-| שלב | רכיב | מה קורה |
-|-----|------|---------|
-| **1** | `addclient` / `addclient2` | מילוי טופס + **`AgeRangeRule`** / **`isHebrewRule2`** / **`IsNumber`** |
-| **2** | `IdValidation.ValidateId` | אימות ת.ז. ישראלית (9 ספרות, Luhn) |
-| **3** | `ClientService.AddClient` | **`Status = true`** → שמירה ב-**`Databace.mdf`** |
-| **4** | `MainPage` | חזרה לתפריט ראשי |
-
----
-
-### 3. הצטרפות למועדון — **מקצה לקצה**
-
-| שלב | רכיב | מה קורה |
-|-----|------|---------|
-| **1** | `MainPage` → `Club_card` / `cart` | כניסה דרך תפריט או מהסל |
-| **2** | `Club_card` | זיהוי לפי ת.ז. → **`AllStatic.myClient`** |
-| **3** | `ClientService.UpdateClient` | **`Member = true`** → שמירה |
-| **4** | `payment` | הנחה מופעלת אוטומטית בקנייה הבאה |
-
----
-
-### 4. תשלום ושמירת הזמנה — **מקצה לקצה**
-
-| שלב | רכיב | מה קורה |
-|-----|------|---------|
-| **1** | `payment` | סכום = **`Sum(Amount × Price_base)`** |
-| **2** | `IdValidation.IsValidIsraeliCreditCardNumber` | כרטיס **`53`** + 16 ספרות + Luhn |
-| **3** | `OrderService.GetCode` | קוד הזמנה חדש → **`AllStatic.myOrder.CodeOrder`** |
-| **4** | `OrderService.AddOrder` | שמירת **`Order`** + **`ItemOrder`** ב-DB |
-| **5** | `ClientService.UpdateClient` | עדכון כתובת (**`Stree`**, **`HouseNumber`**, **`City`**) |
-| **6** | `UpdateAmount` | **`Item.Amount -= Amount`** לכל פריט |
-| **7** | איפוס | **`AllStatic.myOrder = new Order()`**, **`AllStatic.myClient = new Client()`** |
-
----
-
-### 5. ניהול מנהל — **מקצה לקצה**
-
-| שלב | רכיב | מה קורה |
-|-----|------|---------|
-| **1** | `MainPage` → `DirectorCode` | הזנת קוד → **`codedirectionService.Getcodedirector()`** |
-| **2** | `director` | לוח בקרה עם Frame פנימי |
-| **3** | `Kindofitem` / `Additem` | CRUD מוצרים + **`MyPicture.UploadImage_Dlg`** |
-| **4** | `KindofCatgory` / `AddCatgory` | CRUD קטגוריות |
-| **5** | `OrderClient` / `ItemOrder1` | צפייה בהזמנות ושורות |
-| **6** | `ClientOfDirector` | ניהול לקוחות |
-| **7** | `message` | צפייה בכל ההודעות מ-**WCF** |
-
-**קוד מנהל ברירת מחדל:** **`25`** (טבלת **`codedirector`**, שדה **`code`**).
-
----
-
-### 6. מערכת הודעות — **מקצה לקצה**
-
-| שלב | רכיב | מה קורה |
-|-----|------|---------|
-| **1** | **`HOST`** (Messege.sln) | מפעיל WCF על **`localhost:8733`** |
-| **2** | **`MessageManager`** | לקוח שולח הודעה → **`Service1.AddMessage`** → **`meddegedb.mdf`** |
-| **3** | **`message`** (home_center) | מנהל/מערכת קורא **`GetAllMesseges`** → DataGrid |
-
-**Endpoint:**
-```
-http://localhost:8733/Design_Time_Addresses/Messege/Service1/
-```
-
----
-
-## מסד נתונים ראשי
-
-**Connection string פעיל:** **`Entities4`** ב-`App.config`
-
-```
-attachdbfilename=|DataDirectory|\Databace.mdf
-data source=(LocalDB)\MSSQLLocalDB
-```
-
-### ישויות
+## 🗄️ מסד הנתונים
 
 | ישות | שדות עיקריים |
 |------|-------------|
 | **Category** | `Code`, `Dedripition`, `Status` |
 | **Item** | `NameItem`, `Price_base`, `Price_after`, `Amount`, `NameImage`, `Category` |
-| **Client** | `Id` (ת.ז.), `FirstName`, `LastName`, `Phone`, `Email`, `Stree`, `City`, `Member`, `Dateofbirth`, `Status` |
+| **Client** | `Id`, `FirstName`, `LastName`, `Phone`, `Email`, `Stree`, `City`, `Member`, `Dateofbirth` |
 | **City** | `codeCity`, `NameCity` |
 | **Order** | `CodeOrder`, `Id`, `DateOrder`, `ArriveDate`, `PriceEnd`, `Delivery`, `Payment` |
 | **ItemOrder** | `Code`, `CodeItem`, `CodeOrders`, `Amount` |
 | **codedirector** | `code`, `password` |
 
-**DbContext:** **`home_center.model.Entities4`** ← **`Model1.edmx`** (Database First, EF6).
+---
+
+## 📁 מבנה הפרויקט
+
+```
+HomeGadget/
+├── home_center.sln            ← הפתרון הראשי: אפליקציית החנות
+├── home_center/
+│   ├── UI/                    ← דפי WPF (לקוח ומנהל)
+│   ├── BL/                    ← שכבת הלוגיקה העסקית (Services)
+│   ├── model/                 ← Entity Framework (Database First)
+│   ├── MyPicture/             ← תמונות המוצרים
+│   └── Connected Services/    ← הפניות לשירות ה‑WCF
+└── Messege/                   ← מערכת ההודעות (פתרון נפרד)
+    ├── Messege/               ← שירות WCF
+    ├── HOST/                  ← אירוח השירות
+    └── MessageManager/        ← אפליקציה לשליחת הודעות
+```
 
 ---
 
-## שכבת BL
+## ▶️ הרצה
 
-| שירות | תפקיד |
-|--------|--------|
-| **`Globali`** | **`Entities4 myDb`** — singleton |
-| **`ClientService`** | Add / Get (פעילים) / Update |
-| **`ItemService`** | CRUD + **`GetCode()`** |
-| **`CategoryService`** | CRUD קטגוריות |
-| **`OrderService`** | CRUD + **`GetCode()`** |
-| **`ItemOrderService`** | שורות הזמנה + **`GetCode()`** |
-| **`CityServise`** | רשימת ערים |
-| **`codedirectionService`** | קוד מנהל |
+**דרישות:** Windows, Visual Studio 2017 ומעלה (מומלץ 2022), .NET Framework 4.7.2, SQL Server LocalDB (`(LocalDB)\MSSQLLocalDB`).
 
----
+### האפליקציה הראשית
+1. פותחים את `home_center.sln`.
+2. משחזרים את חבילות ה‑NuGet (Restore NuGet Packages).
+3. מצרפים מסד נתונים בשם `Databace.mdf` לתיקייה `bin\Debug`. הקובץ לא נמצא ב‑repo, כי הוא מוחרג ב‑`.gitignore`.
+4. מגדירים את `home_center` כפרויקט ההפעלה ולוחצים **F5**.
 
-## דפי UI
+### מערכת ההודעות (לא חובה)
+1. פותחים את `Messege/Messege.sln` ומריצים את `HOST`. השירות עולה על פורט `8733`.
+2. מריצים את `MessageManager/MessageManager.sln` כדי לשלוח הודעות.
 
-### לקוח (מחוברים לתפריט `MainPage`)
-
-| דף | תפקיד |
-|----|--------|
-| **`MainPage`** | תפריט: מנהל, אודות, מוצרים, סל, עדכון, מועדון |
-| **`pagebeforecast`** | הזדהות לפני קנייה |
-| **`Pageofitem`** | קטלוג + סינון קטגוריה |
-| **`cart`** | סל — **`UserControl2`** |
-| **`payment`** | תשלום + משלוח |
-| **`Club_card`** | הצטרפות למועדון |
-| **`addclient` / `addclient2`** | הרשמה / עדכון |
-| **`About`** | אודות |
-
-### מנהל (מ-`director`)
-
-| דף | תפקיד |
-|----|--------|
-| **`DirectorCode`** | אימות קוד |
-| **`director`** | לוח בקרה |
-| **`Kindofitem` / `Additem`** | מוצרים + תמונות |
-| **`KindofCatgory` / `AddCatgory`** | קטגוריות |
-| **`OrderClient` / `ItemOrder1`** | הזמנות |
-| **`ClientOfDirector`** | לקוחות |
-| **`message`** | הודעות (WCF) |
-| **`ChageCode`** | שינוי קוד מנהל |
-
-### קיים בקוד — **לא מחובר לתפריט**
-
-| דף | מצב |
-|----|-----|
-| **`MessageClient`** | קיים; **`sendMessage`** מבוטל; אין ניווט מ-`MainPage` |
-| **`Member`** | קיים; אין **`Navigate`** אליו בשום מקום |
-| **`MainPage.opinion`** | handler קיים; **אין** MenuItem ב-XAML |
-
----
-
-## תלויות (NuGet)
-
-| חבילה | שימוש |
-|--------|--------|
-| **EntityFramework 6.2.0** | ORM |
-| **HandyControls 3.5.3** | רכיבי UI |
-| **System.Reactive 6.0.1** | Reactive Extensions |
-| **Syncfusion.Xamarin.SfRating** | דירוג |
-| **Xamarin.Forms 5.0.0** | תלות Syncfusion |
-
----
-
-## הפעלה
-
-### אפליקציה ראשית
-
-1. **פתח** `home_center.sln`.
-2. **Restore NuGet packages**.
-3. **הכן** `Databace.mdf` ב-`bin\Debug` (ראה סעיף "מה חסר").
-4. **הגדר** `home_center` כ-StartUp → **F5** → **`MainPage`**.
-
-### מערכת הודעות
-
-1. **פתח** `Messege/Messege.sln`.
-2. **הרץ** **`HOST`** → שירות על **`8733`**.
-3. **הרץ** `MessageManager/MessageManager.sln` לשליחת הודעות.
-
----
-
-## מה חסר / לא עקבי בפרויקט
-
-> מידע לצוות פיתוח — **מצב הקוד כפי שהוא**, לא רשימת שדרוגים.
-
-### קבצים שלא ב-repo
-
-| קובץ | השפעה |
-|------|--------|
-| **`Databace.mdf`** | ב-`.gitignore` — **האפליקציה לא תעבוד** בלי ליצור/לצרף DB |
-| **`meddegedb.mdf`** | מסד הודעות — **WCF לא יעבוד** בלי קובץ זה |
-| **`Class1`** | **`payment.xaml.cs`** מצהיר על **`Class1 tashlum`** — **המחלקה לא קיימת** ב-repo; עלול לחסום Build |
-
-### אי-עקביות במצב סשן
-
-- **`MainPage.Ouritem`** בודק **`AllStatic.myOrder.Client != null`**
-- **`pagebeforecast`** מגדיר רק **`AllStatic.myClient`**
-- **`Pageofitem`** מגדיר **`AllStatic.myOrder.Client`**
-- **תוצאה:** חזרה ל"מוצרים" אחרי זיהוי לקוח עלולה **לדלג** על `pagebeforecast` גם בלי **`myOrder.Client`** מוגדר — תלוי בסדר הניווט
-
-### תשלום (`payment`)
-
-- **`AllStatic.myOrder.Id`** — **לא מוגדר** לפני **`AddOrder`** (FK ל-`Client` עלול להיות ריק)
-- **`UpdateAmount()`** נקרא **אחרי** **`AllStatic.myOrder = new Order()`** — עדכון מלאי **עלול לא לרוץ** על ההזמנה הנכונה
-- **`AddOrder`** נקרא **לפני** מילוי **`DateOrder`** / **`PriceEnd`** הסופיים — נשמרים רק ב-**`UpdateOrder`** שני
-
-### דפים / תפריטים
-
-- **`ChageCode`**: handlers **`again`** / **`againe1`** **ריקים** — שינוי קוד **לא נשמר**; **`Canchcode`** קיים ב-code-behind אך **אין** MenuItem ב-`Director.xaml`
-- **`MessageClient`**: שליחה **מבוטלת** (`//service1.AddMessage`); שליחה אמיתית רק דרך **`MessageManager`**
-- **`MainPage`**: **`opinion`** → `message` — **לא מקושר** לתפריט XAML
-- **`Member`**: דף ריק — **לא בשימוש**
-
-### תשתית
-
-- **`App.config`**: **17+ connection strings** — רק **`Entities4`** בשימוש; השאר שאריות נתיבים ישנים
-- **`ServiceReference1`** + **`ServiceReference2`**: **אותו endpoint** — כפילות
-- **`MyPicture.GetImage`**: נתיב יחסי ל-**`bin\Debug`** — תלוי **Working Directory** בהרצה
-- **שמות:** `Databace`, `Messege`, `Dedripition`, `Stree`, `CityServise` — שגיאות כתיב בכל הפרויקט (עקביות פנימית)
-
----
-
-## טכנולוגיות
-
-- **WPF** — `Page` + `Frame`, RTL
-- **Entity Framework 6** — Database First
-- **SQL Server LocalDB** — `.mdf`
-- **WCF** — `BasicHttpBinding`
-- **HandyControl** — UI
-
----
-
-**Home Center** — חנות WPF עם זרימות **קנייה**, **מועדון**, **ניהול מנהל** ו**הודעות WCF**; מצב הסשן מרוכז ב-**`AllStatic`**, הנתונים ב-**`Globali.myDb`**, והממשק מחולק ל-**`MainPage`** (לקוח) ו-**`director`** (מנהל).
+> **קוד מנהל ברירת מחדל:** `25`
