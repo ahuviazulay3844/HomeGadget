@@ -2,12 +2,7 @@
 
 **מערכת חנות דסקטופ לכלי בית וגאדג'טים**, כתובה ב‑**C#** וב‑**WPF**. במערכת יש ממשק ללקוח וממשק נפרד למנהל. המערכת מכסה את כל התהליך: זיהוי לקוח, קטלוג, סל, מועדון לקוחות עם הנחות, תשלום מאומת וניהול מלא של מוצרים, הזמנות ולקוחות.
 
-![C#](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=csharp&logoColor=white)
-![.NET Framework](https://img.shields.io/badge/.NET_Framework_4.7.2-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
-![WPF](https://img.shields.io/badge/WPF_%2F_XAML-0C54C2?style=for-the-badge&logo=windows&logoColor=white)
-![Entity Framework](https://img.shields.io/badge/Entity_Framework_6-68217A?style=for-the-badge&logo=nuget&logoColor=white)
-![SQL Server](https://img.shields.io/badge/SQL_Server_LocalDB-CC2927?style=for-the-badge&logo=microsoftsqlserver&logoColor=white)
-![WCF](https://img.shields.io/badge/WCF-5C2D91?style=for-the-badge&logo=dotnet&logoColor=white)
+**טכנולוגיות:** `C#` · `.NET Framework 4.7.2` · `WPF / XAML` · `Entity Framework 6` · `SQL Server LocalDB` · `WCF`
 
 ---
 
