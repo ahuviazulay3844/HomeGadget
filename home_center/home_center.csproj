@@ -163,6 +163,7 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="MyPicture.cs" />
+    <Compile Include="UI\Class1.cs" />
     <Compile Include="UI\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
