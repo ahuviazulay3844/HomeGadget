@@ -8,6 +8,10 @@
 
 ## 🎬 סרטון הדגמה
 
+<p align="center">
+  <a href="https://github.com/user-attachments/assets/7a81dbd4-31b5-426a-a114-0e325d5a9f2b"><img src="docs/media/preview.gif" width="820" alt="Preview - click to watch with sound"></a>
+</p>
+
 https://github.com/user-attachments/assets/7a81dbd4-31b5-426a-a114-0e325d5a9f2b
 
 > בסרטון רואים קנייה מלאה מתחילתה ועד סופה. ת"ז שגויה נדחית, ניסיון לחרוג מהמלאי נחסם, הלקוחה מצטרפת למועדון ומקבלת הנחת יום הולדת, כרטיס אשראי שגוי נדחה והתשלום עובר. בסוף נכנסים לממשק המנהל ורואים את ההזמנה החדשה ואת המלאי המעודכן.
